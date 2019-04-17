@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wonderwan.wonderspace.mapper.SdwanClientVethMapper">
+    <resultMap id="sdwanClientVethMap" type="com.wonderwan.wonderspace.model.entity.SdwanClientVeth">
+        <id property="clientVethId" column="client_veth_id"/>
+        <result property="publicKey" column="pub_key"/>
+        <result property="privateKey" column="pri_key"/>
+        <result property="ipv4" column="ipv4"/>
+        <result property="ipv6" column="ipv6"/>
+        <result property="ipv4Netmask" column="ipv4_netmask"/>
+        <result property="ipv6Netmask" column="ipv6_netmask"/>
+        <result property="version" column="version"/>
+        <result property="status" column="status"/>
+        <result property="uptime" column="uptime"/>
+        <result property="boot" column="boot"/>
+    </resultMap>
+
+    <select id="queryWonderBox" resultMap="sdwanClientVethMap">
+        select
+            client_veth_id,
+            pub_key,
+            pri_key,
+            ipv4,
+            ipv6,
+            ipv4_netmask,
+            ipv6_netmask,
+            version,
+            status,
+            uptime,
+            boot
+        from
+            sdwan_client_veth
+        <where>
+            <if test="clientVethId!=null and clientVethId!=''">
+                and client_veth_id = #{clientVethId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryWonderBoxByUserList" resultMap="sdwanClientVethMap">
+        select
+            sdwan_client_veth.client_veth_id,
+            sdwan_client_veth.pub_key,
+            sdwan_client_veth.pri_key,
+            sdwan_client_veth.ipv4,
+            sdwan_client_veth.ipv6,
+            sdwan_client_veth.ipv4_netmask,
+            sdwan_client_veth.ipv6_netmask,
+            sdwan_client_veth.version,
+            sdwan_client_veth.status,
+            sdwan_client_veth.uptime,
+            sdwan_client_veth.boot
+        from
+            sdwan_client_veth
+        left join user
+            on sdwan_client_veth.client_veth_id = user.client_veth_id
+        <where>
+            <if test="clientVethId!=null and clientVethId!=''">
+                and client_veth_id = #{clientVethId}
+            </if>
+            <if test="uid!=null and uid!=''">
+                and uid = #{uid}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateWonderBox">
+        update
+            sdwan_client_veth
+        <set>
+            <if test="publicKey!=null and publicKey!=''">
+                pub_key = #{publicKey},
+            </if>
+            <if test="privateKey!=null and privateKey!=''">
+                pri_key = #{privateKey},
+            </if>
+            <if test="ipv4!=null and ipv4!=''">
+                ipv4 = #{ipv4},
+            </if>
+            <if test="ipv6!=null and ipv6!=''">
+                ipv6 = #{ipv6},
+            </if>
+            <if test="version!=null and version!=''">
+                version = #{version},
+            </if>
+            <if test="status!=null and status!=''">
+                status = #{status},
+            </if>
+            <if test="uptime!=null and uptime!=''">
+                uptime = #{uptime},
+            </if>
+            <if test="boot!=null and boot!=''">
+                boot = #{boot},
+            </if>
+            <if test="ipv4Netmask!=null and ipv4Netmask!=''">
+                ipv4_netmask = #{ipv4Netmask},
+            </if>
+            <if test="ipv6Netmask!=null and ipv6Netmask!=''">
+                ipv6_netmask = #{ipv6Netmask},
+            </if>
+        </set>
+        where
+            client_veth_id = #{clientVethId}
+    </update>
+</mapper>

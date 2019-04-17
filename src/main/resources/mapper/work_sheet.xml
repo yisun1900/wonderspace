@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wonderwan.wonderspace.mapper.WorkSheetMapper">
+    <resultMap id="workSheetMap" type="com.wonderwan.wonderspace.model.entity.WorkSheet">
+        <result property="workId" column="work_id"/>
+        <result property="orderId" column="order_id"/>
+        <result property="uid" column="uid"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="queryWorkSheet" resultMap="workSheetMap">
+        select
+            work_id,
+            order_id,
+            uid,
+            status
+        from
+            work_sheet
+        <where>
+            <if test="workId!=null and workId!=''">
+                and work_id = #{workId}
+            </if>
+            <if test="uid!=null and uid!=''">
+                and uid = #{uid}
+            </if>
+            <if test="orderId!=null and orderId!=''">
+                and order_id = #{orderId}
+            </if>
+        </where>
+    </select>
+</mapper>

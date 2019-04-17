@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wonderwan.wonderspace.mapper.CommunityMapper">
+    <resultMap id="communityMap" type="com.wonderwan.wonderspace.model.entity.Community">
+        <id property="communityId" column="community_id"/>
+        <result property="communityType" column="community_type"/>
+        <result property="aclId" column="acl_id"/>
+        <result property="aclIp" column="acl_ip"/>
+    </resultMap>
+</mapper>

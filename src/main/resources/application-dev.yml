@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: dev
+  datasource:
+    url: jdbc:mysql://10.0.29.27:3306/wonderwan?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: test
+    password: RHIrZXu/xEuLm2uZFZ/QgffxycGhAcOm5Bkikd2ZS2XzwUXReArUhakyLgFdTgXVvNFlYjmHkOUb6uaCsN6K+Q==
+    public-key: MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAIKo22b9DarGz+9HcyFjQlQkzdung+0R/H/moAXis0WGXgZezc85s29cDnRrOPnJst79Mc4QUrKcQ7tr4BTpqxkCAwEAAQ==
+druid:
+  loginUsername: admin
+  loginPassword: admin
+  allow:
+  deny:

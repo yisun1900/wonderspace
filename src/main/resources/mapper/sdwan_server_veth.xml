@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wonderwan.wonderspace.mapper.SdwanServerVethMapper">
+    <resultMap id="sdwanServerVethMap" type="com.wonderwan.wonderspace.model.entity.SdwanServerVeth">
+        <id property="serverVethId" column="server_veth_id"/>
+        <result property="vrfId" column="vrf_id"/>
+        <result property="publicKey" column="pub_key"/>
+        <result property="privateKey" column="pri_key"/>
+        <result property="ipv4" column="ipv4"/>
+        <result property="ipv6" column="ipv6"/>
+        <result property="ipv4Netmask" column="ipv4_netmask"/>
+        <result property="ipv6Netmask" column="ipv6_netmask"/>
+        <result property="token" column="token"/>
+        <result property="listenPort" column="listenPort"/>
+        <result property="runMode" column="runMode"/>
+        <result property="dns" column="dns"/>
+        <result property="version" column="version"/>
+        <result property="status" column="status"/>
+        <result property="uptime" column="uptime"/>
+        <result property="boot" column="boot"/>
+        <result property="peerEndpoint" column="endpoint"/>
+    </resultMap>
+
+    <select id="queryWonderSpace" resultMap="sdwanServerVethMap">
+        select
+            server_veth_id,
+            vrf_id,
+            pub_key,
+            pri_key,
+            ipv4,
+            ipv6,
+            ipv4_netmask,
+            ipv6_netmask,
+            token,
+            listenport,
+            runmode,
+            dns,
+            endpoint,
+            version,
+            status,
+            boot,
+            uptime
+        from
+            wonderspace
+        <where>
+            <if test="serverVethId!=null and serverVethId!=''">
+                and server_veth_id = #{serverVethId}
+            </if>
+        </where>
+    </select>
+</mapper>

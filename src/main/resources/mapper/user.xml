@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.wonderwan.wonderspace.mapper.UserMapper">
+    <resultMap id="userMap" type="com.wonderwan.wonderspace.model.entity.User">
+        <id property="uid" column="uid"/>
+        <result property="cid" column="cid"/>
+        <result property="uuid" column="uuid"/>
+        <result property="serverVethId" column="server_veth_id"/>
+        <result property="clientVethId" column="client_veth_id"/>
+        <result property="license" column="license"/>
+        <result property="services" column="services"/>
+        <result property="expireDt" column="expire_dt"/>
+        <result property="userType" column="user_type"/>
+        <result property="bandwidth" column="bandwidth"/>
+        <result property="status" column="status"/>
+    </resultMap>
+
+    <select id="queryUserByUniqueParam" resultMap="userMap">
+        select
+            uid,
+            cid,
+            uuid,
+            server_veth_id,
+            client_veth_id,
+            license,
+            services,
+            expire_dt,
+            user_type,
+            bandwidth,
+            status
+        from
+            user
+        <where>
+            <if test="uid!=null and uid!=''">
+                and uid = #{uid}
+            </if>
+            <if test="cid!=null and cid!=''">
+                and cid = #{cid}
+            </if>
+            <if test="license!=null and license!=''">
+                and license = #{license}
+            </if>
+            <if test="uuid!=null and uuid!=''">
+                and uuid = #{uuid}
+            </if>
+            <if test="clientVethId!=null and clientVethId!=''">
+                and client_veth_id = #{clientVethId}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryUserList" resultMap="userMap">
+        select
+            uid,
+            cid,
+            uuid,
+            server_veth_id,
+            client_veth_id,
+            license,
+            services,
+            expire_dt,
+            user_type,
+            bandwidth,
+            status
+        from
+            user
+        <where>
+            <if test="uid!=null and uid!=''">
+                and uid = #{uid}
+            </if>
+            <if test="cid!=null and cid!=''">
+                and cid = #{cid}
+            </if>
+            <if test="uuid!=null and uuid!=''">
+                and uuid = #{uuid}
+            </if>
+            <if test="clientVethId!=null and clientVethId!=''">
+                and client_veth_id = #{clientVethId}
+            </if>
+            <if test="serverVethId!=null and serverVethId!=''">
+                and server_veth_id = #{serverVethId}
+            </if>
+        </where>
+    </select>
+
+    <insert id="createUser">
+        insert into user (
+            uid,
+            cid,
+            uuid,
+            server_veth_id,
+            client_veth_id,
+            license,
+            services,
+            expire_dt,
+            user_type,
+            bandwidth,
+            status
+        ) values (
+            #{uid},
+            #{cid},
+            #{uuid},
+            #{serverVethId},
+            #{clientVethId},
+            #{license},
+            #{services},
+            #{expireDt},
+            #{userType},
+            #{bandwidth},
+            #{status}
+        )
+    </insert>
+
+    <update id="updateUser">
+        update user
+         <set>
+            <if test="serverVethId!=null and serverVethId=''">
+                server_veth_id = #{serverVethId},
+            </if>
+            <if test="clientVethId!=null and clientVethId=''">
+                client_veth_id = #{clientVethId},
+            </if>
+            <if test="license!=null and license=''">
+                license = #{license},
+            </if>
+            <if test="services!=null and services=''">
+                services = #{services},
+            </if>
+            <if test="expireDt!=null and expireDt=''">
+                expire_dt = #{expireDt},
+            </if>
+            <if test="userType!=null and userType=''">
+                user_type = #{userType},
+            </if>
+            <if test="bandwidth!=null and bandwidth=''">
+                bandwidth = #{bandwidth},
+            </if>
+            <if test="status!=null and status=''">
+                status = #{status},
+            </if>
+         </set>
+        where uid = #{uid}
+    </update>
+</mapper>
